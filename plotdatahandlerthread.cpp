@@ -38,12 +38,14 @@ void plotDataHandlerThread::onAxisChanged(QCPRange range) {
 }
 
 void plotDataHandlerThread::onClearPlotData() {
+
     m_plot_data.clear();
     m_graphData.clear();
     m_plot_data_content.clear();
     m_curve_num = 0;
     //qDebug() << "cleared plot data";
 }
+
 
 void plotDataHandlerThread::handleDataAuto(const QStringList &lines) {
     if (lines.size() == 0) {

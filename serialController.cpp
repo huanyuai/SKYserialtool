@@ -77,21 +77,7 @@ SerialController::SerialController(QObject *parent,
     m_timer = new QTimer(this);
     connect(m_timer, &QTimer::timeout, this, &SerialController::onTimerTimeout);
     m_timer->setInterval(ReadDataTickTime);
-    //标签加载图片
 
-    // schoolimg->resize(64,64);
-    // schoolimg->move(0,0);
-    // schoolimg->setPixmap(QPixmap(":/icons/icons/sky.jpg"));
-    // m_connectStatus->setPixmap(QPixmap(":/icons/icons/icon_connect.png"));
-
-#ifdef USE_FAKE_SERIAL
-    connect(m_port, &FakeSerialPort::errorOccurred, this, [this](QSerialPort::SerialPortError error) {
-        if (error != QSerialPort::NoError) {
-            //qDebug() << "port error: " << m_port->errorString();
-            closePort();
-        }
-    });
-#else
     // error handling
     connect(m_port, &QSerialPort::errorOccurred, this, [this](QSerialPort::SerialPortError error) {
         if (error != QSerialPort::NoError) {
@@ -100,7 +86,7 @@ SerialController::SerialController(QObject *parent,
             closePort();
         }
     });
-#endif
+
 
 }
 

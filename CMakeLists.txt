@@ -70,11 +70,11 @@ set(PROJECT_SOURCES
         serialplotter.h
         serialplotter.cpp
 
-        fakeserialport.h
-        fakeserialport.cpp
 
-        fakemotor.h
-        fakemotor.cpp
+
+
+
+
 
         serialController.h
         serialController.cpp

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1214</width>
-    <height>901</height>
+    <width>1227</width>
+    <height>961</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -38,7 +38,7 @@
       <x>10</x>
       <y>10</y>
       <width>1201</width>
-      <height>861</height>
+      <height>911</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="3,1">
@@ -58,7 +58,7 @@
             <attribute name="title">
              <string>混合通道</string>
             </attribute>
-            <widget class="QWidget" name="">
+            <widget class="QWidget" name="layoutWidget">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -135,22 +135,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QLabel" name="label_channel_1">
-                     <property name="geometry">
-                      <rect>
-                       <x>100</x>
-                       <y>10</y>
-                       <width>100</width>
-                       <height>20</height>
-                      </rect>
-                     </property>
-                     <property name="text">
-                      <string>label_channel6</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -179,22 +163,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QLabel" name="label_channel_2">
-                     <property name="geometry">
-                      <rect>
-                       <x>100</x>
-                       <y>10</y>
-                       <width>100</width>
-                       <height>20</height>
-                      </rect>
-                     </property>
-                     <property name="text">
-                      <string>label_channel6</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -223,22 +191,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QLabel" name="label_channel_3">
-                     <property name="geometry">
-                      <rect>
-                       <x>100</x>
-                       <y>10</y>
-                       <width>100</width>
-                       <height>20</height>
-                      </rect>
-                     </property>
-                     <property name="text">
-                      <string>label_channel6</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -271,22 +223,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QLabel" name="label_channel_4">
-                     <property name="geometry">
-                      <rect>
-                       <x>100</x>
-                       <y>10</y>
-                       <width>100</width>
-                       <height>20</height>
-                      </rect>
-                     </property>
-                     <property name="text">
-                      <string>label_channel6</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -315,22 +251,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QLabel" name="label_channel_5">
-                     <property name="geometry">
-                      <rect>
-                       <x>100</x>
-                       <y>10</y>
-                       <width>100</width>
-                       <height>20</height>
-                      </rect>
-                     </property>
-                     <property name="text">
-                      <string>label_channel6</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -359,22 +279,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QLabel" name="label_channel_6">
-                     <property name="geometry">
-                      <rect>
-                       <x>100</x>
-                       <y>10</y>
-                       <width>100</width>
-                       <height>20</height>
-                      </rect>
-                     </property>
-                     <property name="text">
-                      <string>label_channel6</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -820,7 +724,7 @@
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="90,100">
+              <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="80,100">
                <item>
                 <widget class="QWidget" name="QW_logo" native="true">
                  <property name="styleSheet">
@@ -830,19 +734,28 @@
                   <item>
                    <widget class="QLabel" name="schoolimg">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>764</width>
-                      <height>321</height>
+                      <width>268</width>
+                      <height>100</height>
                      </size>
                     </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LayoutDirection::LeftToRight</enum>
+                    </property>
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="icons.qrc">:/icons/icons/sky.jpg</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -852,15 +765,15 @@
                   <item>
                    <widget class="QLabel" name="label_9">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>764</width>
-                      <height>321</height>
+                      <width>760</width>
+                      <height>317</height>
                      </size>
                     </property>
                     <property name="text">
@@ -1086,7 +999,7 @@
           <item>
            <widget class="QLineEdit" name="lineEdit_serialSend">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>10</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -1120,7 +1033,7 @@
         <number>9</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="8,3">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -1173,7 +1086,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="8,3">
            <item>
             <widget class="QLabel" name="label_send_history">
              <property name="sizePolicy">
@@ -1248,7 +1161,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QCheckBox" name="checkBox_2">
+          <widget class="QCheckBox" name="checkBox_multiChannelMode">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -1264,7 +1177,7 @@
             <enum>Qt::LayoutDirection::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>独立通道</string>
+            <string>多通道独立解析</string>
            </property>
           </widget>
          </item>
@@ -1301,8 +1214,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1214</width>
-     <height>22</height>
+     <width>1227</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -1325,6 +1238,8 @@
    <header>clickablecombobox.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

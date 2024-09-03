@@ -39,8 +39,44 @@ public:
         }
     }
 
+    // QCPRange getPlotValues(PlotDataPtrList &plot_data, size_t start, size_t end) {
+    //     if (plot_data.size() == 0 || start == end) {return QCPRange();}
+    //     if (start >= buffer[0].size() || end > buffer[0].size() || start > end) {
+    //         qDebug() << "start: " << start << ", end: " << end << "buffer size: " << buffer[0].size();
+    //         throw std::out_of_range("Invalid range");
+    //     }
+    //     plotData.clear();
+    //     QCPRange range;
+    //     range.lower = buffer[0][start];
+    //     range.upper = buffer[0][start];
+    //     for (int i = 0; i < buffer.size(); i++) {
+    //         plotData.append(QVector<QCPGraphData>());
+    //         for (int j = start; j < end; j++) {
+    //             double value = buffer[i][j];
+    //             plotData[i].emplace_back(j, buffer[i][j]);
+
+    //             if (value < range.lower) {
+    //                 range.lower = value;
+    //             }
+    //             if (value > range.upper) {
+    //                 range.upper = value;
+    //             }
+    //         }
+    //          //qDebug() << "plotData ok";
+    //         plot_data[i]->set(plotData[i], true);
+    //         //qDebug() << "auto "  << i << ", range: " << range;
+    //     }
+    //     //qDebug() << "getPlotValues ok";
+    //     // 稍微缩小一点让顶部和底部留有空间
+    //     double mid = (range.upper + range.lower) / 2;
+    //     double distance = (range.upper - range.lower) * 1.25;
+    //     range.upper = mid + distance / 2;
+    //     range.lower = mid - distance / 2;
+    //     //qDebug() << "auto range: " << range;
+    //     return range;
+    // }
     QCPRange getPlotValues(PlotDataPtrList &plot_data, size_t start, size_t end) {
-        if (plot_data.size() == 0 || start == end) {return QCPRange();}
+        if (plot_data.size() == 0 || start == end) { return QCPRange(); }
         if (start >= buffer[0].size() || end > buffer[0].size() || start > end) {
             qDebug() << "start: " << start << ", end: " << end << "buffer size: " << buffer[0].size();
             throw std::out_of_range("Invalid range");
@@ -62,39 +98,49 @@ public:
                     range.upper = value;
                 }
             }
-             //qDebug() << "plotData ok";
             plot_data[i]->set(plotData[i], true);
-            //qDebug() << "auto "  << i << ", range: " << range;
         }
-        //qDebug() << "getPlotValues ok";
-        // 稍微缩小一点让顶部和底部留有空间
         double mid = (range.upper + range.lower) / 2;
         double distance = (range.upper - range.lower) * 1.25;
         range.upper = mid + distance / 2;
         range.lower = mid - distance / 2;
-        //qDebug() << "auto range: " << range;
         return range;
     }
 
+    // void getCompressedPlotValues(PlotDataPtrList &plot_data, size_t start, size_t end) {
+    //     if (plot_data.size() == 0 || start == end) {return;}
+    //     if (start >= buffer[0].size() || end > buffer[0].size() || start > end) {
+    //         // qDebug() << "start: " << start << ", end: " << end << "buffer size: " << buffer[0].size();
+    //         throw std::out_of_range("Invalid range");
+    //     }
+    //     plotData.clear();
+    //     int step = (end - start) / PLOT_BUFFER_SIZE;
+    //     //step = 1;
+    //     //qDebug() << "step: " << step;
+    //     for (int i = 0; i < buffer.size(); i++) {
+    //         plotData.append(QVector<QCPGraphData>());
+    //         for (int j = start; j < end; j += step) {
+    //             plotData[i].emplace_back(j, buffer[i][j]);
+    //         }
+    //         //qDebug() << "plotData ok, data number: " << plot_data[i]->size();
+    //         plot_data[i]->set(plotData[i], true);
+    //     }
+    //     //qDebug() << "getCompressed PlotValues ok";
+    // }
     void getCompressedPlotValues(PlotDataPtrList &plot_data, size_t start, size_t end) {
-        if (plot_data.size() == 0 || start == end) {return;}
+        if (plot_data.size() == 0 || start == end) { return; }
         if (start >= buffer[0].size() || end > buffer[0].size() || start > end) {
-            // qDebug() << "start: " << start << ", end: " << end << "buffer size: " << buffer[0].size();
             throw std::out_of_range("Invalid range");
         }
         plotData.clear();
         int step = (end - start) / PLOT_BUFFER_SIZE;
-        //step = 1;
-        //qDebug() << "step: " << step;
         for (int i = 0; i < buffer.size(); i++) {
             plotData.append(QVector<QCPGraphData>());
             for (int j = start; j < end; j += step) {
                 plotData[i].emplace_back(j, buffer[i][j]);
             }
-            //qDebug() << "plotData ok, data number: " << plot_data[i]->size();
             plot_data[i]->set(plotData[i], true);
         }
-        //qDebug() << "getCompressed PlotValues ok";
     }
 
     size_t size() {

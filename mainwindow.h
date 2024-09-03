@@ -22,7 +22,7 @@ public:
     ~MainWindow();
 
 private slots:
-
+void onModeChanged(int state);  // Slot for handling mode change
 
 private:
     Ui::MainWindow *ui;
