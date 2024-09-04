@@ -72,7 +72,37 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_serial_send_monitor, &serialSendMonitor::sendMessage, m_serial_controller, &SerialController::onSendMessage);
 
     connect(ui->checkBox_multiChannelMode, &QCheckBox::stateChanged, this, &MainWindow::onModeChanged);
+    // connect(ui->windowSize_lineEdit, &QLineEdit::editingFinished, this, &MainWindow::on_windowSize_lineEdit_editingFinished);
+    ui->tabWidget->setCurrentIndex(0);
 
+    // Setup connections for individual window size line edits
+    connect(ui->lineEdit_windowSize_1, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_windowSize_1_editingFinished);
+    connect(ui->lineEdit_windowSize_2, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_windowSize_2_editingFinished);
+    connect(ui->lineEdit_windowSize_3, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_windowSize_3_editingFinished);
+    connect(ui->lineEdit_windowSize_4, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_windowSize_4_editingFinished);
+    connect(ui->lineEdit_windowSize_5, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_windowSize_5_editingFinished);
+    connect(ui->lineEdit_windowSize_6, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_windowSize_6_editingFinished);
+
+    connect(ui->lineEdit_channelname_1, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelname_1_editingFinished);
+    connect(ui->lineEdit_channelname_2, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelname_2_editingFinished);
+    connect(ui->lineEdit_channelname_3, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelname_3_editingFinished);
+    connect(ui->lineEdit_channelname_4, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelname_4_editingFinished);
+    connect(ui->lineEdit_channelname_5, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelname_5_editingFinished);
+    connect(ui->lineEdit_channelname_6, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelname_6_editingFinished);
+
+    connect(ui->lineEdit_channelpre_1, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelpre_1_editingFinished);
+    connect(ui->lineEdit_channelpre_2, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelpre_2_editingFinished);
+    connect(ui->lineEdit_channelpre_3, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelpre_3_editingFinished);
+    connect(ui->lineEdit_channelpre_4, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelpre_4_editingFinished);
+    connect(ui->lineEdit_channelpre_5, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelpre_5_editingFinished);
+    connect(ui->lineEdit_channelpre_6, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelpre_6_editingFinished);
+
+    connect(ui->lineEdit_channelsuf_1, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelsuf_1_editingFinished);
+    connect(ui->lineEdit_channelsuf_2, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelsuf_2_editingFinished);
+    connect(ui->lineEdit_channelsuf_3, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelsuf_3_editingFinished);
+    connect(ui->lineEdit_channelsuf_4, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelsuf_4_editingFinished);
+    connect(ui->lineEdit_channelsuf_5, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelsuf_5_editingFinished);
+    connect(ui->lineEdit_channelsuf_6, &QLineEdit::editingFinished, this, &MainWindow::on_lineEdit_channelsuf_6_editingFinished);
 }
 
 MainWindow::~MainWindow()
@@ -115,3 +145,283 @@ void MainWindow::onModeChanged(int state) {
         // Continue for other plots
     }
 }
+
+// Slot implementations for each line edit
+void MainWindow::on_lineEdit_windowSize_1_editingFinished()
+{
+    bool ok;
+    int newWindowSize = ui->lineEdit_windowSize_1->text().toInt(&ok);
+    if (ok && newWindowSize > 0) {
+        m_serial_plotter->setWindowSize(1, newWindowSize);  // Assuming the serialPlotter class has this function
+    } else {
+        qDebug() << "Invalid Input"<< "Please enter a valid positive number.";
+        ui->lineEdit_windowSize_1->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_windowSize_2_editingFinished()
+{
+    bool ok;
+    int newWindowSize = ui->lineEdit_windowSize_2->text().toInt(&ok);
+    if (ok && newWindowSize > 0) {
+        m_serial_plotter->setWindowSize(2, newWindowSize);
+    } else {
+        qDebug() << "Invalid Input"<< "Please enter a valid positive number.";
+        ui->lineEdit_windowSize_2->clear();
+    }
+}
+
+// Continue for other line edits in the same way...
+void MainWindow::on_lineEdit_windowSize_3_editingFinished()
+{
+    bool ok;
+    int newWindowSize = ui->lineEdit_windowSize_3->text().toInt(&ok);
+    if (ok && newWindowSize > 0) {
+        m_serial_plotter->setWindowSize(3, newWindowSize);
+    } else {
+        qDebug() << "Invalid Input"<< "Please enter a valid positive number.";
+        ui->lineEdit_windowSize_3->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_windowSize_4_editingFinished()
+{
+    bool ok;
+    int newWindowSize = ui->lineEdit_windowSize_4->text().toInt(&ok);
+    if (ok && newWindowSize > 0) {
+        m_serial_plotter->setWindowSize(4, newWindowSize);
+    } else {
+        qDebug() << "Invalid Input"<< "Please enter a valid positive number.";
+        ui->lineEdit_windowSize_4->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_windowSize_5_editingFinished()
+{
+    bool ok;
+    int newWindowSize = ui->lineEdit_windowSize_5->text().toInt(&ok);
+    if (ok && newWindowSize > 0) {
+        m_serial_plotter->setWindowSize(5, newWindowSize);
+    } else {
+        qDebug() << "Invalid Input"<< "Please enter a valid positive number.";
+        ui->lineEdit_windowSize_5->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_windowSize_6_editingFinished()
+{
+    bool ok;
+    int newWindowSize = ui->lineEdit_windowSize_6->text().toInt(&ok);
+    if (ok && newWindowSize > 0) {
+        m_serial_plotter->setWindowSize(6, newWindowSize);
+    } else {
+        qDebug() << "Invalid Input"<< "Please enter a valid positive number.";
+        ui->lineEdit_windowSize_6->clear();
+    }
+}
+
+
+
+void MainWindow::on_lineEdit_channelname_1_editingFinished()
+{
+    QString channelName = ui->lineEdit_channelname_1->text();
+    if (!channelName.isEmpty()) {
+        m_serial_plotter->setChannelName(1, channelName);  // Assuming the serialPlotter class has this function
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel name.";
+        ui->lineEdit_channelname_1->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelname_2_editingFinished()
+{
+    QString channelName = ui->lineEdit_channelname_2->text();
+    if (!channelName.isEmpty()) {
+        m_serial_plotter->setChannelName(2, channelName);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel name.";
+        ui->lineEdit_channelname_2->clear();
+    }
+}
+
+// Continue similarly for other channel name line edits
+void MainWindow::on_lineEdit_channelname_3_editingFinished()
+{
+    QString channelName = ui->lineEdit_channelname_3->text();
+    if (!channelName.isEmpty()) {
+        m_serial_plotter->setChannelName(3, channelName);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel name.";
+        ui->lineEdit_channelname_3->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelname_4_editingFinished()
+{
+    QString channelName = ui->lineEdit_channelname_4->text();
+    if (!channelName.isEmpty()) {
+        m_serial_plotter->setChannelName(4, channelName);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel name.";
+        ui->lineEdit_channelname_4->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelname_5_editingFinished()
+{
+    QString channelName = ui->lineEdit_channelname_5->text();
+    if (!channelName.isEmpty()) {
+        m_serial_plotter->setChannelName(5, channelName);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel name.";
+        ui->lineEdit_channelname_5->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelname_6_editingFinished()
+{
+    QString channelName = ui->lineEdit_channelname_6->text();
+    if (!channelName.isEmpty()) {
+        m_serial_plotter->setChannelName(6, channelName);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel name.";
+        ui->lineEdit_channelname_6->clear();
+    }
+}
+
+// Similarly for channel prefixes
+void MainWindow::on_lineEdit_channelpre_1_editingFinished()
+{
+    QString channelPrefix = ui->lineEdit_channelpre_1->text();
+    if (!channelPrefix.isEmpty()) {
+        m_serial_plotter->setChannelPrefix(1, channelPrefix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel prefix.";
+        ui->lineEdit_channelpre_1->clear();
+    }
+}
+
+// Continue similarly for other channel prefixes
+void MainWindow::on_lineEdit_channelpre_2_editingFinished()
+{
+    QString channelPrefix = ui->lineEdit_channelpre_2->text();
+    if (!channelPrefix.isEmpty()) {
+        m_serial_plotter->setChannelPrefix(2, channelPrefix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel prefix.";
+        ui->lineEdit_channelpre_2->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelpre_3_editingFinished()
+{
+    QString channelPrefix = ui->lineEdit_channelpre_3->text();
+    if (!channelPrefix.isEmpty()) {
+        m_serial_plotter->setChannelPrefix(3, channelPrefix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel prefix.";
+        ui->lineEdit_channelpre_3->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelpre_4_editingFinished()
+{
+    QString channelPrefix = ui->lineEdit_channelpre_4->text();
+    if (!channelPrefix.isEmpty()) {
+        m_serial_plotter->setChannelPrefix(4, channelPrefix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel prefix.";
+        ui->lineEdit_channelpre_4->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelpre_5_editingFinished()
+{
+    QString channelPrefix = ui->lineEdit_channelpre_5->text();
+    if (!channelPrefix.isEmpty()) {
+        m_serial_plotter->setChannelPrefix(5, channelPrefix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel prefix.";
+        ui->lineEdit_channelpre_5->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelpre_6_editingFinished()
+{
+    QString channelPrefix = ui->lineEdit_channelpre_6->text();
+    if (!channelPrefix.isEmpty()) {
+        m_serial_plotter->setChannelPrefix(6, channelPrefix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel prefix.";
+        ui->lineEdit_channelpre_6->clear();
+    }
+}
+
+// Similarly for channel suffixes
+void MainWindow::on_lineEdit_channelsuf_1_editingFinished()
+{
+    QString channelSuffix = ui->lineEdit_channelsuf_1->text();
+    if (!channelSuffix.isEmpty()) {
+        m_serial_plotter->setChannelSuffix(1, channelSuffix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel suffix.";
+        ui->lineEdit_channelsuf_1->clear();
+    }
+}
+
+// Continue similarly for other channel suffixes
+void MainWindow::on_lineEdit_channelsuf_2_editingFinished()
+{
+    QString channelSuffix = ui->lineEdit_channelsuf_2->text();
+    if (!channelSuffix.isEmpty()) {
+        m_serial_plotter->setChannelSuffix(2, channelSuffix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel suffix.";
+        ui->lineEdit_channelsuf_2->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelsuf_3_editingFinished()
+{
+    QString channelSuffix = ui->lineEdit_channelsuf_3->text();
+    if (!channelSuffix.isEmpty()) {
+        m_serial_plotter->setChannelSuffix(3, channelSuffix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel suffix.";
+        ui->lineEdit_channelsuf_3->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelsuf_4_editingFinished()
+{
+    QString channelSuffix = ui->lineEdit_channelsuf_4->text();
+    if (!channelSuffix.isEmpty()) {
+        m_serial_plotter->setChannelSuffix(4, channelSuffix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel suffix.";
+        ui->lineEdit_channelsuf_4->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelsuf_5_editingFinished()
+{
+    QString channelSuffix = ui->lineEdit_channelsuf_5->text();
+    if (!channelSuffix.isEmpty()) {
+        m_serial_plotter->setChannelSuffix(5, channelSuffix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel suffix.";
+        ui->lineEdit_channelsuf_5->clear();
+    }
+}
+
+void MainWindow::on_lineEdit_channelsuf_6_editingFinished()
+{
+    QString channelSuffix = ui->lineEdit_channelsuf_6->text();
+    if (!channelSuffix.isEmpty()) {
+        m_serial_plotter->setChannelSuffix(6, channelSuffix);
+    } else {
+        qDebug() << "Invalid Input" << "Please enter a valid channel suffix.";
+        ui->lineEdit_channelsuf_6->clear();
+    }
+}
+

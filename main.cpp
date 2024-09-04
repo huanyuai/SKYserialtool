@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     QIcon icon(":/icons/icons/logo.ico");
     w.setWindowIcon(icon);
-    w.setWindowTitle("SKY多参数串口助手");
+    w.setWindowTitle("基于QT的多参数生理信号采集上位机 Ver:0.9");
     w.show();
     return a.exec();
 }

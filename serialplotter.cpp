@@ -53,6 +53,7 @@ serialPlotter::serialPlotter(QObject *parent,
     connect(m_thread, &QThread::finished, &m_plot_thread, &QObject::deleteLater);
     connect(m_thread, &QThread::finished, m_thread, &QObject::deleteLater);
 
+
     m_thread->start();
     //setupDisplayPlot(MAX_GRAPH_NUM);
     setupSingleChannelPlot();
@@ -84,6 +85,39 @@ void serialPlotter::setMultiChannelMode(bool enabled) {
     m_multiChannelMode = enabled;
     // Optionally initialize or clear multi-channel plots here
 }
+//设置多通道WindowSize
+void serialPlotter::setWindowSize(int channel,int &Size) {
+    if (channel >= 0 && channel < m_windowSize.size()) {
+       m_windowSize[channel-1]= Size;
+    }
+    qDebug() <<m_windowSize[channel-1]<<  "m_windowSize[channel-1]= Size"<< Size;
+    // Optionally initialize or clear multi-channel plots here
+}
+//设置多通道包头
+void serialPlotter::setChannelPrefix(int channelIndex, const QString &prefix) {
+    channelIndex -= 1;
+    if (channelIndex >= 0 && channelIndex < m_channelPrefixes.size()) {
+        m_channelPrefixes[channelIndex] = prefix;
+        qDebug() <<"m_channelPrefixes[channelIndex] = prefix"<< m_channelPrefixes[channelIndex];
+    }
+}
+//设置多通道包尾
+void serialPlotter::setChannelSuffix(int channelIndex, const QString &suffix) {
+    channelIndex -= 1;
+    if (channelIndex >= 0 && channelIndex < m_channelSuffixes.size()) {
+        m_channelSuffixes[channelIndex] = suffix;
+        qDebug() <<"m_channelSuffixes[channelIndex] = suffix"<< m_channelSuffixes[channelIndex];
+    }
+}
+//设置多通道图例通道名
+void serialPlotter::setChannelName(int channelIndex, const QString &name) {
+    channelIndex -= 1;
+    if (channelIndex >= 0 && channelIndex < m_channelNames.size()) {
+        m_channelNames[channelIndex] = name;
+        qDebug() <<"m_channelNames[channelIndex] = name"<< m_channelNames[channelIndex];
+    }
+}
+
 void serialPlotter::onNewLinesReceived(const QStringList &lines) {
     if (m_stop) {
         return;
@@ -111,17 +145,17 @@ void serialPlotter::onNewLinesReceived(const QStringList &lines) {
     }
 
 
-int serialPlotter::getChannelIndex(const QString &channel_id) {
-    // Implement logic to map channel identifier to index (0 to 5) corresponding to display_plot_1 to display_plot_6
-    if (channel_id.contains("channel1")) return 0;
-    if (channel_id.contains("channel2")) return 1;
-    if (channel_id.contains("channel3")) return 2;
-    if (channel_id.contains("channel4")) return 3;
-    if (channel_id.contains("channel5")) return 4;
-    if (channel_id.contains("channel6")) return 5;
-    // Return -1 if the channel_id is not recognized
-    return -1;
-}
+    int serialPlotter::getChannelIndex(const QString &channelPrefix, const QString &channelSuffix) {
+        // Map channel prefix and suffix to channel index (0 to 5) corresponding to display_plot_1 to display_plot_6
+        if (channelPrefix == m_channelPrefixes[0] && channelSuffix == m_channelSuffixes[0]) return 0;
+        if (channelPrefix == m_channelPrefixes[1] && channelSuffix == m_channelSuffixes[1]) return 1;
+        if (channelPrefix == m_channelPrefixes[2] && channelSuffix == m_channelSuffixes[2]) return 2;
+        if (channelPrefix == m_channelPrefixes[3] && channelSuffix == m_channelSuffixes[3]) return 3;
+        if (channelPrefix == m_channelPrefixes[4] && channelSuffix == m_channelSuffixes[4]) return 4;
+        if (channelPrefix == m_channelPrefixes[5] && channelSuffix == m_channelSuffixes[5]) return 5;
+        // Return -1 if the combination of prefix and suffix is not recognized
+        return -1;
+    }
 
 // Implement helper methods if needed
 void serialPlotter::onCurveNumChanged(int new_num) {
@@ -181,7 +215,7 @@ void serialPlotter::setupDisplayPlot(int numGraphs)
         //m_display_plot->graph()->setPen(m_pen_colors[i]);
         m_display_plot->legend->setVisible(true);
         // 关闭抗锯齿
-        m_display_plot->graph()->setName("通道 "+QString::number(i));
+        m_display_plot->graph()->setName("通道 "+QString::number(i+1));
         m_display_plot->graph()->setAntialiased(false);
     }
 
@@ -206,11 +240,11 @@ void serialPlotter::setupSingleChannelPlot() {
         pen.setWidth(GRAPH_PEN_WIDTH); // 设置线的粗细
         plot->graph(0)->setPen(pen);
         // 设置每条曲线的独特名称
-        plot->graph(0)->setName("通道 " + QString::number(i));
+        plot->graph(0)->setName(m_channelNames[i]);
         plot->graph(0)->setAntialiased(false);
 
         // 设置图表的基本配置
-        plot->axisRect()->setupFullAxesBox(true);
+        // plot->axisRect()->setupFullAxesBox(true);
         plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
         plot->setNoAntialiasingOnDrag(true);
 
@@ -221,6 +255,12 @@ void serialPlotter::setupSingleChannelPlot() {
         plot->legend->setBrush(QBrush(QColor(255, 255, 255, 200)));  // 设置图例的背景色及透明度
         plot->legend->setBorderPen(QPen(Qt::black));  // 设置图例边框
         plot->legend->setIconSize(QSize(10, 10));  // 设置图例图标的大小
+
+        plot->xAxis->setTickLabels(false);//不显示刻度值
+
+        plot->xAxis->setTickLabelSide(QCPAxis::LabelSide::lsInside);//刻度值显示在内部
+        plot->yAxis->setTickLabelSide(QCPAxis::LabelSide::lsInside);//刻度值显示在内部
+        plot->yAxis->setNumberFormat("gbc");//g灵活的格式,b漂亮的指数形式，c乘号改成×
 
     }
 
@@ -256,12 +296,12 @@ void serialPlotter::handleSingleChannelData(const QString &line) {
         }
     }
 
-    int channelIndex = getChannelIndex(channelPrefix);
+    int channelIndex = getChannelIndex(channelPrefix,channelSuffix);
     if (channelIndex >= 0 && channelIndex < m_multiChannelPlots.size()) {
         QCustomPlot *plot = m_multiChannelPlots[channelIndex];
         if (!yData.isEmpty()) {
-            qDebug() << "Updating plot for channel: " << channelIndex << " with data: " << yData;
-            updatePlotData(yData, plot);
+            qDebug() << "Updating plot for channel: " << channelIndex << " with data: " << yData<< " with windowSize: " << m_windowSize[channelIndex];
+            updatePlotData(yData, plot,m_windowSize[channelIndex]);
         }
     }else{
         qDebug() << "Invalid channel: " << channelIndex;
@@ -269,13 +309,10 @@ void serialPlotter::handleSingleChannelData(const QString &line) {
 
 }
 
-void serialPlotter::updatePlotData(const QVector<double> &yData, QCustomPlot *plot) {
+void serialPlotter::updatePlotData(const QVector<double> &yData, QCustomPlot *plot,int &windowSize) {
     if (!plot || yData.isEmpty()) {
         return;
     }
-
-    // 设置固定显示的窗口长度（例如100个数据点）
-    const int windowSize = 10;  // 调整这个值来控制显示周期的长度
 
     // 获取当前数据点的 x 坐标起点
     double startX = plot->graph(0)->dataCount();  // 获取当前数据点数量作为 x 起点
