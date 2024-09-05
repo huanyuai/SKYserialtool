@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1654</width>
+    <width>1404</width>
     <height>1000</height>
    </rect>
   </property>
@@ -38,7 +38,7 @@
       <x>0</x>
       <y>0</y>
       <width>1391</width>
-      <height>981</height>
+      <height>961</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="3,2">
@@ -886,7 +886,7 @@
             <item>
              <widget class="QLabel" name="label_21">
               <property name="text">
-               <string>包头</string>
+               <string>帧头</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -896,7 +896,7 @@
             <item>
              <widget class="QLabel" name="label_22">
               <property name="text">
-               <string>包尾</string>
+               <string>帧尾</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1535,8 +1535,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1654</width>
-     <height>18</height>
+     <width>1404</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

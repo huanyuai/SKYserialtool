@@ -114,6 +114,7 @@ void serialPlotter::setChannelName(int channelIndex, const QString &name) {
     channelIndex -= 1;
     if (channelIndex >= 0 && channelIndex < m_channelNames.size()) {
         m_channelNames[channelIndex] = name;
+        m_multiChannelPlots[channelIndex]->graph(0)->setName(m_channelNames[channelIndex]);
         qDebug() <<"m_channelNames[channelIndex] = name"<< m_channelNames[channelIndex];
     }
 }
@@ -356,7 +357,10 @@ void serialPlotter::updatePlotData(const QVector<double> &yData, QCustomPlot *pl
 
     // 设定 y 轴范围
     plot->yAxis->setRange(yMin, yMax);
-
+    // int maxDataPoints = windowSize * 2; // 设定最大数据点数
+    // if (plot->graph(0)->dataCount() > maxDataPoints) {
+    //     plot->graph(0)->removeDataBefore(xAxisUpperBound - windowSize); // 删除最早的数据
+    // }
     // 重新绘制图表以显示更新后的数据
     plot->replot();
 }
