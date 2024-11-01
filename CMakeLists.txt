@@ -10,10 +10,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # logo
-if(WIN32)
-  set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_SOURCE_DIR}/logo.rc")
-endif()
-
+# if(WIN32)
+#   set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_SOURCE_DIR}/logo.rc")
+# endif()
+# if(WIN32)
+#   set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_SOURCE_DIR}/logo.rc")
+#   add_executable(SKYserialtool WIN32 ${PROJECT_SOURCES} ${APP_ICON_RESOURCE_WINDOWS})
+# else()
+#   add_executable(SKYserialtool ${PROJECT_SOURCES})
+# endif()
 ## Add AddressSanitizer flags
 #if (MSVC)
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fsanitize=address")
@@ -71,11 +76,6 @@ set(PROJECT_SOURCES
         serialplotter.cpp
 
 
-
-
-
-
-
         serialController.h
         serialController.cpp
 
@@ -101,23 +101,19 @@ set(PROJECT_SOURCES
         plotdatahandlerthread.cpp
 
 
+
     )
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    # set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_SOURCE_DIR}/logo.rc")
     qt_add_executable(SKYserialtool
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         icons.qrc
-         # logo
-        #${APP_ICON_RESOURCE_WINDOWS}
+        # logo.rc
+        # ${APP_ICON_RESOURCE_WINDOWS}
 
     )
-    # qt_add_resources(my_app "app_images"
-    #     PREFIX "/icons"
-    #     FILES
-    #         icons/icon_connect.png
-    #         icons/icon_disconnect.png
-    #         icons/logo.ico
-    # )
+
 
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET SKYserialtool APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

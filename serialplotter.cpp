@@ -87,10 +87,11 @@ void serialPlotter::setMultiChannelMode(bool enabled) {
 }
 //设置多通道WindowSize
 void serialPlotter::setWindowSize(int channel,int &Size) {
+    channel-=1;
     if (channel >= 0 && channel < m_windowSize.size()) {
-       m_windowSize[channel-1]= Size;
+       m_windowSize[channel]= Size;
     }
-    qDebug() <<m_windowSize[channel-1]<<  "m_windowSize[channel-1]= Size"<< Size;
+    qDebug() <<channel<<  "m_windowSize[channel-1]= Size"<< Size;
     // Optionally initialize or clear multi-channel plots here
 }
 //设置多通道包头

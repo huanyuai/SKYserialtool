@@ -3,7 +3,7 @@
         <file>icons/icon_connect.png</file>
         <file>icons/icon_disconnect.png</file>
         <file>icons/logo.ico</file>
-        <!--<file>icons/sky-min.png</file>-->
+        <file>logo.rc</file>
         <file>icons/sky.jpg</file>
 
     </qresource>
